@@ -9,7 +9,6 @@ sap.ui.define(
       {
         override: {
           onInit: function () {
-            console.log("Test INIT");
             this._oTimer = null;
           },
 
@@ -65,7 +64,6 @@ sap.ui.define(
             })[0];
             if (oSmartChart && typeof oSmartChart.rebindChart === "function") {
               oSmartChart.rebindChart();
-              console.log("SmartChart rebound (fallback)");
             }
 
             const oSmartTable = oView.findAggregatedObjects(true, function (o) {
@@ -73,7 +71,6 @@ sap.ui.define(
             })[0];
             if (oSmartTable && typeof oSmartTable.rebindTable === "function") {
               oSmartTable.rebindTable();
-              console.log("SmartTable rebound (fallback)");
             }
           } catch (oError) {
             // error refresh
@@ -84,6 +81,19 @@ sap.ui.define(
           return new Promise((resolve, reject) => {
             const sModelName = "customer.ZMPP_GW_PPAUTOREFRESH_SRV";
             const oModel = this.getView()?.getModel(sModelName);
+            // Create the Filter object
+            const aFilters = [
+              new sap.ui.model.Filter(
+                "Objid",
+                sap.ui.model.FilterOperator.EQ,
+                "E008S",
+              ),
+              new sap.ui.model.Filter(
+                "FieldName",
+                sap.ui.model.FilterOperator.EQ,
+                "F6798.REFRESHINTERVALINMINUTES",
+              ),
+            ];
 
             if (!oModel) {
               return reject();
@@ -94,23 +104,28 @@ sap.ui.define(
               .metadataLoaded()
               .then(() => {
                 oModel.read("/CustomObjectSet", {
+                  filters: [aFilters],
                   success: (oData) => {
                     try {
                       const a = oData?.results || oData?.d?.results;
                       if (!a || a.length === 0) {
                         // error handling data empty in odata
+                        return;
                       }
 
                       const v = a[0].FieldValue; // get the first array and FieldValue
                       // make sure fieldValue isnumber
                       const iMinutes = Number(v);
+                      // const iMinutes = -1;
                       if (!Number.isFinite(iMinutes) || iMinutes <= 0) {
-                        // error handling invalid value
+                        // pop up error handling invalid value
+                        sap.m.MessageBox.error(
+                          "Value from zzcat_custobj should be a greater than zero.",
+                        );
+                        return;
                       }
 
                       const iMs = iMinutes * 60 * 1000;
-                      console.log("Timer in ms: ", iMs);
-                      // const iMs = 6000;
                       resolve(iMs);
                     } catch (e) {
                       reject(e);
