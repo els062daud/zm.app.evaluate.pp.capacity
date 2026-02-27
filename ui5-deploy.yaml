@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "4.0"
+metadata:
+  name: customer-zm-app-evaluate-pp-capacity
+type: application
+resources:
+  configuration:
+    propertiesFileSourceEncoding: UTF-8
+customConfiguration:
+  adp:
+    support:
+      id: "@sap/generator-fiori"
+      version: 1.20.2
+      toolsId: de51a0e0-679d-438d-97dd-23e1eb71d6af
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          url: https://ksd.sap.klgsys.com
+          client: "100"
+        app:
+          package: ZKLG
+          transport: KSDK901946
+        exclude:
+          - /test/
+        lrep: apps/i2d.pp.capevalanalyticss1/appVariants/customer.zm.app.evaluate.pp.capacity/

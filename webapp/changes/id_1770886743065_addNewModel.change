@@ -1,0 +1,29 @@
+{
+  "fileName": "id_1770886743065_addNewModel",
+  "namespace": "apps/i2d.pp.capevalanalyticss1/appVariants/customer.zm.app.evaluate.pp.capacity/changes",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "creation": "2026-02-12T08:59:03.065Z",
+  "packageName": "$TMP",
+  "reference": "customer.zm.app.evaluate.pp.capacity",
+  "support": {
+    "generator": "@sap-ux/adp-tooling"
+  },
+  "changeType": "appdescr_ui5_addNewModel",
+  "content": {
+    "dataSource": {
+      "customer.ZMPP_GW_PPAUTOREFRESH_SRV": {
+        "uri": "/sap/opu/odata/sap/ZMPP_GW_PPAUTOREFRESH_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "model": {
+      "customer.ZMPP_GW_PPAUTOREFRESH_SRV": {
+        "dataSource": "customer.ZMPP_GW_PPAUTOREFRESH_SRV"
+      }
+    }
+  }
+}

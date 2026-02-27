@@ -1,0 +1,23 @@
+{
+  "changeType": "codeExt",
+  "reference": "customer.zm.app.evaluate.pp.capacity",
+  "namespace": "apps/customer.zm.app.evaluate.pp.capacity/changes/",
+  "creation": "2026-02-12T06:44:07.553Z",
+  "projectId": "customer.zm.app.evaluate.pp.capacity",
+  "moduleName": "customer/zm/app/evaluate/pp/capacity/changes/coding/autorefresh",
+  "support": {
+    "generator": "@sap-ux/control-property-editor",
+    "sapui5Version": "1.144.1"
+  },
+  "originalLanguage": "EN",
+  "layer": "CUSTOMER_BASE",
+  "fileType": "change",
+  "fileName": "id_1770878551544_239_codeExt",
+  "content": {
+    "codeRef": "coding/autorefresh.js"
+  },
+  "texts": {},
+  "selector": {
+    "controllerName": "sap.suite.ui.generic.template.AnalyticalListPage.view.AnalyticalListPage"
+  }
+}
